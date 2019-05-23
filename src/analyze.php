@@ -1,18 +1,8 @@
 <?php
 
 $script_start=microtime(true);
-ini_set('max_execution_time',30);
-header("Content-type: application/json; charset=utf-8");
-error_reporting(0);
-require("log.php");
 
-
-define("UPLOAD_FOLDER","uploads");
-$logger= new Log();
-
-$dict_index=array();
-
-
+require("config.php");
 
 if($_SERVER["REQUEST_METHOD"]=="POST")
 {
@@ -22,14 +12,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
     {
      
      
-    //   //$logger->WriteLog("target folder : ".UPLOAD_FOLDER);
       
       if(!file_exists(UPLOAD_FOLDER))
       {
           mkdir(UPLOAD_FOLDER,0777,true);
       }
           $target_file=UPLOAD_FOLDER."/".$_FILES["file_load"]["name"];
-        //   //$logger->WriteLog("target path: ".$target_file);
+
           
           $allowed = array("jpg","jpeg");
           $ext= strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -38,8 +27,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
           
           if(!in_array($ext,$allowed))
           {
-            //   //$logger->WriteLog("FILE_EXT_NOT_ALLOWED");
-              exit("FILE_EXT_NOT_ALLOWED");
+            $logger->WriteLog("unsuppored file loaded. exiting...");
+            exit("File extention not allowed. please try again");
           }
 
           
@@ -50,11 +39,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
           
           //making array of RGB index:
 
+          //GD Library 
+          // First thing I found on Google when I was searching a way to import jpeg file into php variable, was a stackoverflow solution
+          //so I took parts of it and changed it for my needs. it was perfect choice for this matter.
           $image = imagecreatefromjpeg($target_file); 
-         // sleep(10);
+
           if(!$image)
           {
-             die("ERROR_IMAGE_LOADING");
+              $logger->WriteLog("error in loading picture. exiting...");
+             die("We are sorry, there was an error loading that picture, please try again later.");
           }
         
           $width = imagesx($image);
@@ -62,18 +55,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
           $height = imagesy($image);
           
 
-          $colors=array();
         
-        
-          
 
           for ($y = 0; $y < $height; $y++) {
       
           for ($x = 0; $x < $width; $x++) {
-              $rgb = imagecolorat($image, $x, $y);
-            
- 
-            
+              $rgb = imagecolorat($image, $x, $y);//finding the rgb index and storing in $colors array
+                          
               array_push($colors,$rgb);
               
           }  
@@ -82,90 +70,70 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
      
       
    
-   $dict_colors=array();
 
-   foreach ($colors as $value) {
+   foreach ($colors as $value) { 
     $r = ($value >> 16) & 0xFF;
     $g = ($value >> 8) & 0xFF;
     $b = $value & 0xFF;
     $temp=$r."_".$g."_".$b;
-           // //$logger->WriteLog("isset(dict_colors['$temp'])  = ".$dict_colors["$r_$g_$b"]);
-    
-     if(!isset($dict_colors[$temp]->display))
-     {//if not exist, creating.
-        //$logger->WriteLog("CREATING array ");
+
+    if(!isset($dict_colors[$temp]->display))
+     {//if not exist, creating item .
         $dict_colors[$temp]->counter=1;
        $dict_colors[$temp]->display="RGB($r,$g,$b)";
 
-       
-
-    }
-
-     else{
+    }  else{
      //if already exist ,count.
         $dict_colors[$temp]->counter++;
-
      }
+ 
+         }//end of foreach loop on $colors
 
-     
-        
-      }//end of for each loop
+    
 
-     
-
-      //creating the dict_index in this format : dict_index["33"]->"111_220_255"  or =  still need to check
-
-     
-
-
-
-         //TEST
+      //creating the dict_index in this format : dict_index["33"]="111_220_255"  
          
-
-
-         //CREAT DICT_INDEX
-       //from the value i can access the display and counter propertys
+       //from the value i can access the display and counter propertyes
        //and from the key i can access the index of the dict_colors array
          foreach ($dict_colors as $key => $value) {
           
            $dict_index["$value->counter"]=$key;//"111_22_111"
-            
+           $total_counter_sum+=$dict_colors[$key]->counter;//calculating the total sum of counter of any RGB color to use for the calculation of percentage any chosen RGB from picture
+         
         }
 
         krsort($dict_index,SORT_NUMERIC);//sorting according to counter value which is the index here DESC order
-        $amount_prior=0;
+        $amount_prior_index=0;
 
        foreach ($dict_index as $key => $val) {//taking nth highest numbers (which the highest starts from 0 index)
-       $logger->WriteLog("$amount_prior is the amount_prior" );
-          if($amount_prior<2)//access only the largest two
-            {
-            $logger->WriteLog("yes");
-          $logger->WriteLog( $dict_colors[$val]->display);
-         $amount_prior++;
-           }
-         else{
-            $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
 
-        die();//no need to loop more after we found the highest numbers.
+          if($amount_prior_index<NTH_TOP_RGB)//access only the largest nth values
+            {
+
+        $dict_colors[$val]->percent=( $dict_colors[$val]->counter/$total_counter_sum)*100;//calculation appreance of RGB in percentage
+        array_push($dict_result,$dict_colors[$val]);//creating final json object which would be send back to user
+              
+           $amount_prior_index++;
+
+
+
+           }
+         else
+         {
+            //sending back to client side
+               $dict_result = json_encode($dict_result);
+               echo $dict_result;
+               $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
+
+            die();//no need to loop more after we found the highest numbers.
           }
 
 }
          
 
-
-       
-
-
-
-
-
-
-
     }
 }
 
 
-$logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
 
-//TODO: find the most effiecnt way to look in the json object for the 5 most seen RGB , option 1 : sort and dvidie by half algoritm, option 2: sort in desecing order and pick the 5 first item from the json or find other solution.
 
