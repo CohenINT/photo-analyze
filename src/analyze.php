@@ -1,34 +1,16 @@
 <?php
 
 $script_start=microtime(true);
-ini_set('max_execution_time',100);
+ini_set('max_execution_time',30);
 header("Content-type: application/json; charset=utf-8");
 error_reporting(0);
 require("log.php");
-require("dict.php");
+
 
 define("UPLOAD_FOLDER","uploads");
 $logger= new Log();
 
-
- function isExist(&$dict,$rgb_value)
-{
-    $len=count($dict);
-    //$log=new Log();
-    for($index=0;$index<$len;$index++)
-    {
-       $is_Exist=  array_search($rgb_value,$dict);
-    //    //$log->WriteLog("isExist()  -   index = $index");
-       if($is_Exist!=false)
-       {
-        //    //$log->WriteLog("isExist()  finished with yes");
-           return "yes";
-       }
-    }
-    // //$log->WriteLog("isExist()  finished with no");
-    return "no";
-   
-} 
+$dict_index=array();
 
 
 
@@ -91,7 +73,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
               $rgb = imagecolorat($image, $x, $y);
             
  
-          //TODO: I HAVE TO USE THE CALCULATED R G AND B AND NOT THE INDEX IN RGB VALUE.
             
               array_push($colors,$rgb);
               
@@ -113,32 +94,66 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
      if(!isset($dict_colors[$temp]->display))
      {//if not exist, creating.
         //$logger->WriteLog("CREATING array ");
-      
+        $dict_colors[$temp]->counter=1;
        $dict_colors[$temp]->display="RGB($r,$g,$b)";
-       $dict_colors[$temp]->counter=1;
-       //$logger->WriteLog("WHILE IN CREATEING dict_color[$temp]->counter = ". $dict_colors[$temp]->counter);
-     }
+
+       
+
+    }
 
      else{
      //if already exist ,count.
-     //$logger->WriteLog("ISSET = TRUE:: dict_color->counter = (".$dict_colors[$temp]->counter.") is this 1?");
-       //$logger->WriteLog("BEFORE COUNTING COUNTER IS  = ".$dict_colors[$temp]->counter."  counting 1 to exist array");
         $dict_colors[$temp]->counter++;
-        //$logger->WriteLog("AFTER count the counter property is: ".$dict_colors[$temp]->counter);
 
      }
 
-         //TODO: count the appearences of every RGB and save it to a dictonery index variable
      
         
-      }
+      }//end of for each loop
+
+     
+
+      //creating the dict_index in this format : dict_index["33"]->"111_220_255"  or =  still need to check
+
+     
+
+
+
          //TEST
-
-        $test = json_encode($dict_colors);
-        echo($test);
+         
 
 
+         //CREAT DICT_INDEX
+       //from the value i can access the display and counter propertys
+       //and from the key i can access the index of the dict_colors array
+         foreach ($dict_colors as $key => $value) {
+          
+           $dict_index["$value->counter"]=$key;//"111_22_111"
+            
+        }
 
+        krsort($dict_index,SORT_NUMERIC);//sorting according to counter value which is the index here DESC order
+        $amount_prior=0;
+
+       foreach ($dict_index as $key => $val) {//taking nth highest numbers (which the highest starts from 0 index)
+       $logger->WriteLog("$amount_prior is the amount_prior" );
+          if($amount_prior<2)//access only the largest two
+            {
+            $logger->WriteLog("yes");
+          $logger->WriteLog( $dict_colors[$val]->display);
+         $amount_prior++;
+           }
+         else{
+            $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
+
+        die();//no need to loop more after we found the highest numbers.
+          }
+
+}
+         
+
+
+       
 
 
 
@@ -151,6 +166,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
 
 $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
-//TODO:  the colors array saving the $rgb values as planned , but the problem is with the dict_colors. iam having hard time to define it correctly.
-//up until now it created duplicated indexes and it messes up with the counting, 
-//i need to make a unique index for every $rgb, and make a counter for it.
+
+//TODO: find the most effiecnt way to look in the json object for the 5 most seen RGB , option 1 : sort and dvidie by half algoritm, option 2: sort in desecing order and pick the 5 first item from the json or find other solution.
+

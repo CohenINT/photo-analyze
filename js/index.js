@@ -37,17 +37,44 @@ $("form").on("submit",function(e)
        });
 });
 
+}
 
 
 
+//test
+function find_max()
+{
+
+var arr2=new Array();
+var arr1=[1,34,45,2,7,111,5,99,40,76,55,99,94,92];
+let arr_len=arr1.length;
+var max=0;
+arr1.forEach(element => {
+    if(element>max)
+    {
+        max = element;
+    }
 
 
 
+});
+
+arr2.push(max);
+return arr2;
+}
 
 
 
+function test()
+{
 
-
+    var number=3;
+    var result;
+    while(number>0)
+    {
+        find_max();
+        number--;
+    }
 
 
 }
