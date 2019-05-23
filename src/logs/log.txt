@@ -1,0 +1,21 @@
+script runtime in seconds: 0.099727869033813   |23.05.19 22:58:43  
+script runtime in seconds: 0.095584869384766   |23.05.19 23:10:30  
+script runtime in seconds: 0.0080249309539795   |23.05.19 23:11:24  
+script runtime in seconds: 0.097898006439209   |23.05.19 23:13:04  
+script runtime in seconds: 0.0064079761505127   |23.05.19 23:30:15  
+script runtime in seconds: 0.005457878112793   |23.05.19 23:30:55  
+script runtime in seconds: 0.0065648555755615   |23.05.19 23:34:41  
+script runtime in seconds: 0.099178075790405   |23.05.19 23:35:12  
+script runtime in seconds: 0.0076360702514648   |23.05.19 23:36:53  
+script runtime in seconds: 0.11780905723572   |23.05.19 23:37:02  
+script runtime in seconds: 0.88063716888428   |23.05.19 23:37:24  
+script runtime in seconds: 0.85355281829834   |23.05.19 23:37:52  
+script runtime in seconds: 0.86529994010925   |23.05.19 23:38:26  
+script runtime in seconds: 0.83834385871887   |23.05.19 23:40:39  
+unsuppored file loaded. exiting...   |23.05.19 23:42:39  
+unsuppored file loaded. exiting...   |23.05.19 23:42:54  
+unsuppored file loaded. exiting...   |23.05.19 23:43:41  
+unsuppored file loaded. exiting...   |23.05.19 23:44:37  
+script runtime in seconds: 0.88224196434021   |23.05.19 23:45:02  
+script runtime in seconds: 0.40888595581055   |23.05.19 23:46:29  
+unsuppored file loaded. exiting...   |23.05.19 23:46:55  

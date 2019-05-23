@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Analyzer!</title>
+
+	<link href="https://fonts.googleapis.com/css?family=ABeeZee|Poppins|Quattrocento+Sans|Yanone+Kaffeesatz&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="css\bootstrap.css" />
+	<link rel="stylesheet" href="css\index.css" />
+
+
+</head>
+<body>
+<div class="container">
+	
+	
+
+
+    <form>
+
+		
+
+        <div class="row">
+            <div class=" col-12 font-weight-normal justify-content-center d-flex ">
+                <p class="h1">Analyzer!</p>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12">
+				
+                <input type="file" class="btn btn-primary col-12" name="file_load" id="file_load" value="choose photo"/>
+
+            </div>
+
+
+
+        </div>
+		
+        <div class="col-12 p-2"></div>
+        <div class="col-12 justify-content-center d-flex">
+            <input type="submit" id="load_btn"  name="submit" class="btn btn-primary p-2 col-8" value="Upload" />
+
+        </div>
+
+
+       
+
+
+
+        <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
+    </form>
+	
+	
+	<!--after getting back from server-->
+    <div class="row">
+        <div class="col-12">
+			
+			<img id="loaded_photo" src=""  />
+            <table id="data_tbl" class="data_tbl">
+				
+				
+				
+
+            </table>
+
+        </div>
+    </div>
+	
+	
+
+</div>
+
+	<script src="js\jquery-3.4.1.js"></script>
+	<script src="js\popper.min.js"></script>
+	<script src="js\bootstrap.js"></script>
+
+    <script src="js\index.js"></script>
+	
+
+
+</body>
+</html>

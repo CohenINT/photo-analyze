@@ -17,20 +17,31 @@ $("form").on("submit",function(e)
             contentType: false,
            cache: false,
             processData:false,
-           success: function(ret_data){
-          console.log("success");
+           success: function(ret_data) {
+
+               let selectFile = document.getElementById("file_load").files[0];
             //TODO: use return data to append an html element to present the results.
-            console.log("sucess ajax");
-            $("body").html("");
-            $.each(ret_data,function(i,val){
-                $("body").append("<p>"+i+" ,"+ret_data[i].display+" , "+ret_data[i].counter+"</p>")
-                });
-            debugger;
+               console.table(ret_data);
+
+
+            $.each(ret_data,function(i,val) {
+                $("#data_tbl").append("<p>" + i + " ," + ret_data[i].display + " , " + ret_data[i].counter + "</p>");
+
+
+
+               });
+
+
+
+
+               $("#loaded_photo").attr("src", "http://localhost:4000/www/photo-analyze/src/uploads/" + selectFile.name);
+
            },
            error:function(xhr,status,error)
            {
-               console.log("error ajax call");
-               console.log(xhr);
+               console.log(xhr.responseText);
+
+               alert("error - " + xhr.responseText);
            }
 
         
@@ -41,40 +52,7 @@ $("form").on("submit",function(e)
 
 
 
-//test
-function find_max()
-{
-
-var arr2=new Array();
-var arr1=[1,34,45,2,7,111,5,99,40,76,55,99,94,92];
-let arr_len=arr1.length;
-var max=0;
-arr1.forEach(element => {
-    if(element>max)
-    {
-        max = element;
-    }
 
 
 
-});
 
-arr2.push(max);
-return arr2;
-}
-
-
-
-function test()
-{
-
-    var number=3;
-    var result;
-    while(number>0)
-    {
-        find_max();
-        number--;
-    }
-
-
-}
