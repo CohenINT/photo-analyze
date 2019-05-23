@@ -21,7 +21,10 @@ $("form").on("submit",function(e)
           console.log("success");
             //TODO: use return data to append an html element to present the results.
             console.log("sucess ajax");
-            console.table(ret_data);
+            $("body").html("");
+            $.each(ret_data,function(i,val){
+                $("body").append("<p>"+i+" ,"+ret_data[i].display+" , "+ret_data[i].counter+"</p>")
+                });
             debugger;
            },
            error:function(xhr,status,error)

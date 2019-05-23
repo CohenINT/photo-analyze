@@ -17,7 +17,7 @@ class Log{
            mkdir("./".LOG_FOLDER);
          }
 
-         fopen("./".LOG_FOLDER."/".LOG_FILE, 'w') or die();
+        // fopen("./".LOG_FOLDER."/".LOG_FILE, 'w') or die();
       
       }
      

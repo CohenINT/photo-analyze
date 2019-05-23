@@ -1,8 +1,8 @@
-target folder : uploads   |21.05.19 22:26:24  
-target path: uploads/thing.jpg   |21.05.19 22:26:24  
-ext : jpg   |21.05.19 22:26:24  
-script runtime in seconds: 5.385160446167   |21.05.19 22:26:24  
-target folder : uploads   |21.05.19 22:27:31  
-target path: uploads/thing.jpg   |21.05.19 22:27:31  
-ext : jpg   |21.05.19 22:27:31  
-script runtime in seconds: 5.9158802032471   |21.05.19 22:27:31  
+script runtime in seconds: 0.0060529708862305   |23.05.19 01:24:26  
+script runtime in seconds: 0.14222812652588   |23.05.19 01:26:35  
+script runtime in seconds: 0.0034818649291992   |23.05.19 01:28:18  
+script runtime in seconds: 0.0041558742523193   |23.05.19 01:39:24  
+script runtime in seconds: 0.0033729076385498   |23.05.19 01:39:37  
+script runtime in seconds: 0.0038411617279053   |23.05.19 01:40:52  
+script runtime in seconds: 0.0026860237121582   |23.05.19 01:51:36  
+script runtime in seconds: 0.0042190551757812   |23.05.19 01:51:46  
