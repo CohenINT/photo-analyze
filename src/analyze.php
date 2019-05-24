@@ -92,7 +92,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
       //  ///TEST
       //   foreach ($dict_colors as $key => $value) {
-      //      echo  $value->display." , ".$value->counter." \n";
+      //      echo $key."  : ". $value->display." , ".$value->counter." \n";
       //   }
       //   die("exit test");
 
@@ -112,23 +112,17 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
          
         }
 
-//  ///TEST
-//  foreach ($dict_index as $key => $value) {
-//    echo  $value." \n";
-// }
-// die("exit test");
 
-// //TEST
 
 
         krsort($dict_index,SORT_NUMERIC);//sorting according to counter value which is the index here DESC order
 
       //   //TEST//////////////
-      //    foreach ($dict_index as $key => $value) {
+         // foreach ($dict_index as $key => $value) {
             
-      //       echo $key . "=>  ".$value." \n";
-      //    }
-      //    die("exit test");
+         //    echo $key . "=>  ".$value." \n";
+         // }
+         // die("exit test");
 
       //   //TEST///////////////
 
@@ -138,22 +132,27 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
 
         //TODO: fix when there are small pictures, all counter values are the same. 
-
+       
+        $dict_index_indexer=0;//this is an index value to count the the current index of dict_index so we wont have overflow
+        $dict_index_length=count($dict_index);
        foreach ($dict_index as $key => $val) {//taking nth highest numbers (which the highest starts from 0 index)
 
-           if(count($dict_index)==1)  {
-             
+           if($dict_index_length<NTH_TOP_RGB)  {
+
             $result=array();
 
              foreach ($dict_colors as $_key => $_value) 
              {
                  
-                if($amount_prior_index<NTH_TOP_RGB)
+                if($amount_prior_index<NTH_TOP_RGB  )
                 {
 
-                  $_formated_percent=  sprintf("%2.3f",( $dict_colors[$_key]->counter/$total_counter_sum)*100); //format number like "46.423" 
+                  $_formated_percent=  sprintf("%2.3f",( $_value->counter/$total_counter_sum)*100); //format number like "46.423" 
+                 
+                  
                   $temp_push[$_key]->percent=$_formated_percent;
                   $temp_key_array= explode("_",$_key);
+
                   $temp_push[$_key]->display="RGB(".$temp_key_array[0].",".$temp_key_array[1].",".$temp_key_array[2].")";
                   array_push($result,$temp_push[$_key]);
                   $amount_prior_index++;
@@ -173,9 +172,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
 
 
-           };//happens when all counter values of all RGB are same 
+           }//dict_index items are lower than NTH_TOP_RGB const
 
-          if($amount_prior_index<NTH_TOP_RGB)//access only the largest nth values
+         else if(($amount_prior_index<NTH_TOP_RGB) )//access only the largest nth values
             {
           
              $formated_percent=  sprintf("%2.3f",( $dict_colors[$val]->counter/$total_counter_sum)*100); //format number like "46.423" 
@@ -185,23 +184,31 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
               
            $amount_prior_index++;
 
+          // echo("indexer = ".$dict_index_indexer);
 
 
            }
          else
          {
-            //sending back to client side
-               $dict_result = json_encode($dict_result);
-               echo $dict_result;
-               $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
+
+            // //sending back to client side
+            //    $dict_result = json_encode($dict_result);
+            //    echo $dict_result;
+            //    $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
              
             
-            die();//no need to loop more after we found the highest numbers.
+            // die();//no need to loop more after we found the highest numbers.
           }
 
 }//end of  foreach ($dict_index as $key => $val)
    
-
+    //sending back to client side
+    $dict_result = json_encode($dict_result);
+    echo $dict_result;
+    $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
+  
+ 
+ die();//no need to loop more after we found the highest numbers.
 
 
 
