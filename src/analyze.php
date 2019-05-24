@@ -90,14 +90,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
          }//end of foreach loop on $colors
 
 
-      //  ///TEST
-      //   foreach ($dict_colors as $key => $value) {
-      //      echo $key."  : ". $value->display." , ".$value->counter." \n";
-      //   }
-      //   die("exit test");
-
-      //  //TEST
-
+     
     
 
       //creating the dict_index in this format : dict_index["33"]="111_220_255"  
@@ -117,23 +110,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 
         krsort($dict_index,SORT_NUMERIC);//sorting according to counter value which is the index here DESC order
 
-      //   //TEST//////////////
-         // foreach ($dict_index as $key => $value) {
-            
-         //    echo $key . "=>  ".$value." \n";
-         // }
-         // die("exit test");
+  
 
-      //   //TEST///////////////
-
-
-
-        $amount_prior_index=0;
-
-
-        //TODO: fix when there are small pictures, all counter values are the same. 
-       
-        $dict_index_indexer=0;//this is an index value to count the the current index of dict_index so we wont have overflow
         $dict_index_length=count($dict_index);
        foreach ($dict_index as $key => $val) {//taking nth highest numbers (which the highest starts from 0 index)
 
@@ -180,25 +158,14 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
              $formated_percent=  sprintf("%2.3f",( $dict_colors[$val]->counter/$total_counter_sum)*100); //format number like "46.423" 
 
              $dict_colors[$val]->percent= $formated_percent;//calculation appreance of RGB in percentage
-        array_push($dict_result,$dict_colors[$val]);//creating final json object which would be send back to user
+           array_push($dict_result,$dict_colors[$val]);//creating final json object which would be send back to user
               
            $amount_prior_index++;
 
-          // echo("indexer = ".$dict_index_indexer);
 
 
            }
-         else
-         {
-
-            // //sending back to client side
-            //    $dict_result = json_encode($dict_result);
-            //    echo $dict_result;
-            //    $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
-             
-            
-            // die();//no need to loop more after we found the highest numbers.
-          }
+       
 
 }//end of  foreach ($dict_index as $key => $val)
    

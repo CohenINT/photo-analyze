@@ -11,5 +11,16 @@ font-family: 'Quattrocento Sans', sans-serif;
 
 
 img {
-    max-width: 50%;
+    max-width: 100%;
+    max-height: 300px;
+}
+
+#file_load{
+
+    background-color: #e6ebf2;
+}
+
+.txt_style {
+    font-size: 20px;
+   
 }

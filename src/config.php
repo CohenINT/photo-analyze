@@ -15,6 +15,8 @@ $dict_index=array();
 $dict_result=array();
 $colors=array();
 $total_counter_sum=0;
+$amount_prior_index=0;
+
 
 //test_dict
 //array for testing
