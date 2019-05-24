@@ -1,39 +1,15 @@
-script runtime in seconds: 0.099727869033813   |23.05.19 22:58:43  
-script runtime in seconds: 0.095584869384766   |23.05.19 23:10:30  
-script runtime in seconds: 0.0080249309539795   |23.05.19 23:11:24  
-script runtime in seconds: 0.097898006439209   |23.05.19 23:13:04  
-script runtime in seconds: 0.0064079761505127   |23.05.19 23:30:15  
-script runtime in seconds: 0.005457878112793   |23.05.19 23:30:55  
-script runtime in seconds: 0.0065648555755615   |23.05.19 23:34:41  
-script runtime in seconds: 0.099178075790405   |23.05.19 23:35:12  
-script runtime in seconds: 0.0076360702514648   |23.05.19 23:36:53  
-script runtime in seconds: 0.11780905723572   |23.05.19 23:37:02  
-script runtime in seconds: 0.88063716888428   |23.05.19 23:37:24  
-script runtime in seconds: 0.85355281829834   |23.05.19 23:37:52  
-script runtime in seconds: 0.86529994010925   |23.05.19 23:38:26  
-script runtime in seconds: 0.83834385871887   |23.05.19 23:40:39  
-unsuppored file loaded. exiting...   |23.05.19 23:42:39  
-unsuppored file loaded. exiting...   |23.05.19 23:42:54  
-unsuppored file loaded. exiting...   |23.05.19 23:43:41  
-unsuppored file loaded. exiting...   |23.05.19 23:44:37  
-script runtime in seconds: 0.88224196434021   |23.05.19 23:45:02  
-script runtime in seconds: 0.40888595581055   |23.05.19 23:46:29  
-unsuppored file loaded. exiting...   |23.05.19 23:46:55  
-script runtime in seconds: 0.15004801750183   |24.05.19 10:12:26  
-script runtime in seconds: 0.42347598075867   |24.05.19 10:14:26  
-script runtime in seconds: 0.40023398399353   |24.05.19 10:14:33  
-script runtime in seconds: 0.8376350402832   |24.05.19 10:15:01  
-script runtime in seconds: 0.85258889198303   |24.05.19 10:15:11  
-script runtime in seconds: 0.0038108825683594   |24.05.19 10:15:15  
-script runtime in seconds: 0.0067830085754395   |24.05.19 10:15:36  
-script runtime in seconds: 0.0040919780731201   |24.05.19 10:15:52  
-script runtime in seconds: 0.0035040378570557   |24.05.19 10:17:56  
-script runtime in seconds: 0.0040619373321533   |24.05.19 10:19:20  
-script runtime in seconds: 0.81365513801575   |24.05.19 10:20:50  
-script runtime in seconds: 0.8463819026947   |24.05.19 10:21:00  
-script runtime in seconds: 0.83466696739197   |24.05.19 10:22:17  
-script runtime in seconds: 0.86386299133301   |24.05.19 10:22:39  
-script runtime in seconds: 0.81402802467346   |24.05.19 10:27:05  
-script runtime in seconds: 0.97016000747681   |24.05.19 10:28:50  
-script runtime in seconds: 0.82829189300537   |24.05.19 10:30:43  
-script runtime in seconds: 0.82709884643555   |24.05.19 10:31:49  
+script runtime in seconds: 0.98345303535461   |24.05.19 13:50:32  
+script runtime in seconds: 0.0033121109008789   |24.05.19 13:51:05  
+script runtime in seconds: 0.018203020095825   |24.05.19 13:51:55  
+script runtime in seconds: 7.3645260334015   |24.05.19 13:53:32  
+script runtime in seconds: 0.0031139850616455   |24.05.19 13:59:47  
+script runtime in seconds: 0.091141939163208   |24.05.19 14:00:10  
+script runtime in seconds: 0.0032439231872559   |24.05.19 14:00:28  
+script runtime in seconds: 0.039212942123413   |24.05.19 14:13:59  
+script runtime in seconds: 0.0033230781555176   |24.05.19 14:14:53  
+script runtime in seconds: 0.0029370784759521   |24.05.19 14:15:07  
+script runtime in seconds: 0.0032379627227783   |24.05.19 14:16:33  
+script runtime in seconds: 0.0035920143127441   |24.05.19 14:16:58  
+script runtime in seconds: 0.0036149024963379   |24.05.19 14:20:32  
+script runtime in seconds: 0.0036261081695557   |24.05.19 14:21:31  
+script runtime in seconds: 0.0029659271240234   |24.05.19 14:21:43  

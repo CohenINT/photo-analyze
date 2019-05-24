@@ -60,8 +60,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
           for ($y = 0; $y < $height; $y++) {
       
           for ($x = 0; $x < $width; $x++) {
-              $rgb = imagecolorat($image, $x, $y);//finding the rgb index and storing in $colors array
-                          
+
+              $rgb = imagecolorat($image, $x, $y);//finding the rgb index and storing in $colors array            
               array_push($colors,$rgb);
               
           }  
@@ -89,28 +89,98 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
  
          }//end of foreach loop on $colors
 
+
+      //  ///TEST
+      //   foreach ($dict_colors as $key => $value) {
+      //      echo  $value->display." , ".$value->counter." \n";
+      //   }
+      //   die("exit test");
+
+      //  //TEST
+
     
 
       //creating the dict_index in this format : dict_index["33"]="111_220_255"  
          
-       //from the value i can access the display and counter propertyes
-       //and from the key i can access the index of the dict_colors array
+       //from the value I can access the display and counter propertyes
+       //and from the key I can access the index of the dict_colors array
          foreach ($dict_colors as $key => $value) {
           
-           $dict_index["$value->counter"]=$key;//"111_22_111"
+           $dict_index["$value->counter"]=$key;//" example :  $dict_index["37"] = "111_22_111"
+       
            $total_counter_sum+=$dict_colors[$key]->counter;//calculating the total sum of counter of any RGB color to use for the calculation of percentage any chosen RGB from picture
          
         }
 
+//  ///TEST
+//  foreach ($dict_index as $key => $value) {
+//    echo  $value." \n";
+// }
+// die("exit test");
+
+// //TEST
+
+
         krsort($dict_index,SORT_NUMERIC);//sorting according to counter value which is the index here DESC order
+
+      //   //TEST//////////////
+      //    foreach ($dict_index as $key => $value) {
+            
+      //       echo $key . "=>  ".$value." \n";
+      //    }
+      //    die("exit test");
+
+      //   //TEST///////////////
+
+
+
         $amount_prior_index=0;
+
+
+        //TODO: fix when there are small pictures, all counter values are the same. 
 
        foreach ($dict_index as $key => $val) {//taking nth highest numbers (which the highest starts from 0 index)
 
+           if(count($dict_index)==1)  {
+             
+            $result=array();
+
+             foreach ($dict_colors as $_key => $_value) 
+             {
+                 
+                if($amount_prior_index<NTH_TOP_RGB)
+                {
+
+                  $_formated_percent=  sprintf("%2.3f",( $dict_colors[$_key]->counter/$total_counter_sum)*100); //format number like "46.423" 
+                  $temp_push[$_key]->percent=$_formated_percent;
+                  $temp_key_array= explode("_",$_key);
+                  $temp_push[$_key]->display="RGB(".$temp_key_array[0].",".$temp_key_array[1].",".$temp_key_array[2].")";
+                  array_push($result,$temp_push[$_key]);
+                  $amount_prior_index++;
+                }
+
+                else{
+                     
+                  $result=json_encode($result);
+                  echo $result;
+                  $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
+                   die();
+
+
+                }
+                
+             }
+
+
+
+           };//happens when all counter values of all RGB are same 
+
           if($amount_prior_index<NTH_TOP_RGB)//access only the largest nth values
             {
+          
+             $formated_percent=  sprintf("%2.3f",( $dict_colors[$val]->counter/$total_counter_sum)*100); //format number like "46.423" 
 
-        $dict_colors[$val]->percent=( $dict_colors[$val]->counter/$total_counter_sum)*100;//calculation appreance of RGB in percentage
+             $dict_colors[$val]->percent= $formated_percent;//calculation appreance of RGB in percentage
         array_push($dict_result,$dict_colors[$val]);//creating final json object which would be send back to user
               
            $amount_prior_index++;
@@ -124,12 +194,23 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                $dict_result = json_encode($dict_result);
                echo $dict_result;
                $logger->WriteLog("script runtime in seconds: ".((microtime(true)-$script_start )));
-
+             
+            
             die();//no need to loop more after we found the highest numbers.
           }
 
-}
-         
+}//end of  foreach ($dict_index as $key => $val)
+   
+
+
+
+
+
+
+
+
+
+
 
     }
 }

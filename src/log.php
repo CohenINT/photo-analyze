@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('Asia/Jerusalem');
 define("LOG_FOLDER","logs");
 define("LOG_FILE","log.txt");
 
@@ -8,6 +8,7 @@ class Log{
 
     public function WriteLog($msg)
     {
+   
       $current_datetime=date("d.m.y H:i:s");
       $file="./".LOG_FOLDER."/".LOG_FILE;
       if(!file_exists($file))
