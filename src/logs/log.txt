@@ -16,3 +16,8 @@ script runtime in seconds: 0.0029659271240234   |24.05.19 14:21:43
 script runtime in seconds: 0.89030003547668   |24.05.19 14:24:05  
 script runtime in seconds: 0.82779002189636   |24.05.19 14:27:49  
 script runtime in seconds: 0.0069770812988281   |24.05.19 14:27:54  
+script runtime in seconds: 0.0059680938720703   |24.05.19 14:29:07  
+script runtime in seconds: 0.38684296607971   |24.05.19 14:29:58  
+script runtime in seconds: 0.0063290596008301   |24.05.19 14:30:11  
+script runtime in seconds: 0.089236974716187   |24.05.19 14:30:37  
+script runtime in seconds: 0.82711601257324   |24.05.19 14:30:43  
