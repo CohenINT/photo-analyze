@@ -25,7 +25,7 @@ $("form").on("submit",function(e)
 
 
             $.each(ret_data,function(i,val) {
-                $("#data_tbl").append("<p>" + i + " ," + ret_data[i].display + " , " + ret_data[i].counter + "</p>");
+                $("#data_tbl").append("<p>"  + ret_data[i].display + " , " +Math.round( ret_data[i].percent)+"%" +"<span style='height:20px;display:block;background-color:"+ret_data[i].display+";'><span> </p>"  );
 
 
 
