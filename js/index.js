@@ -8,6 +8,16 @@ function init()
 
 $("form").on("submit",function(e)
 {
+    //delete exist photo
+   $("#loaded_photo").attr("src","");
+
+    //remove exist data rgb
+    $("#data_tbl").children().remove()
+
+
+
+
+
     let submit={submit:"submit"};
     e.preventDefault();
        $.ajax({
